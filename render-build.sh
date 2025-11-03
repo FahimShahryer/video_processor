@@ -6,8 +6,7 @@ set -o errexit  # Exit on error
 # Install Python dependencies
 pip install -r requirements.txt
 
-# Install FFmpeg (Render uses Ubuntu)
-apt-get update
-apt-get install -y ffmpeg
+# Note: FFmpeg should be pre-installed on Render
+# If not, we need to use a Docker deployment or different hosting
 
 echo "✅ Build completed successfully!"
