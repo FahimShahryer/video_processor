@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: video-processor
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: bash render-build.sh
+    startCommand: python main.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0

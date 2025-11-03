@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# FFmpeg binaries (too large for GitHub - Render will install them)
+ffmpeg.exe
+ffprobe.exe
+ffplay.exe
+
+# Video files and outputs
+uploads/*
+!uploads/.gitkeep
+output/*
+!output/.gitkeep
+temp_segments/*
+!temp_segments/.gitkeep
+static/videos/*
+!static/videos/.gitkeep
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+*.flv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
