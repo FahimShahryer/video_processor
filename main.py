@@ -34,9 +34,44 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
-# FFmpeg path
-FFMPEG_PATH = str(BASE_DIR / "ffmpeg.exe")
-FFPROBE_PATH = str(BASE_DIR / "ffprobe.exe")
+# FFmpeg path - Works on both Windows (local) and Linux (Render)
+import platform
+import shutil
+
+def get_ffmpeg_path():
+    """Get FFmpeg path based on OS"""
+    # Check if running on Windows with local ffmpeg.exe
+    if platform.system() == "Windows":
+        local_ffmpeg = BASE_DIR / "ffmpeg.exe"
+        if local_ffmpeg.exists():
+            return str(local_ffmpeg)
+
+    # Check if ffmpeg is in system PATH (Linux/Mac)
+    system_ffmpeg = shutil.which("ffmpeg")
+    if system_ffmpeg:
+        return system_ffmpeg
+
+    # Fallback to local path
+    return str(BASE_DIR / "ffmpeg.exe")
+
+def get_ffprobe_path():
+    """Get FFprobe path based on OS"""
+    # Check if running on Windows with local ffprobe.exe
+    if platform.system() == "Windows":
+        local_ffprobe = BASE_DIR / "ffprobe.exe"
+        if local_ffprobe.exists():
+            return str(local_ffprobe)
+
+    # Check if ffprobe is in system PATH (Linux/Mac)
+    system_ffprobe = shutil.which("ffprobe")
+    if system_ffprobe:
+        return system_ffprobe
+
+    # Fallback to local path
+    return str(BASE_DIR / "ffprobe.exe")
+
+FFMPEG_PATH = get_ffmpeg_path()
+FFPROBE_PATH = get_ffprobe_path()
 
 
 class Segment(BaseModel):
